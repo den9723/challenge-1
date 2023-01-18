@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700;800&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="estilos.css">
+    <title>Encriptador y desencriptador de textos | Alura</title>
+  </head>
+
+  <body>
+
+    <header>
+        <div>
+            <img src="imagenes/Logo-a.png" class="logo" alt="logo">
+        </div>
+    </header>
+
+    <main>
+      
+      <section class="seccion_1">
+        <textarea class="textarea_1" id="textarea_entrada" name="areatexto" cols="50" rows="12" placeholder="Ingrese el texto aquí"></textarea>
+        <p class="detalle">Sólo letras minúsculas y sin acentos</p>
+        <div class="cont_botones">
+          <input class="btn_encriptar"type="button" value="Encriptar" onclick="encriptarTexto()">
+          <input class="btn_desencriptar"type="button" value="Desencriptar" onclick="desencriptarTexto()">
+        </div>
+      </section>
+      
+      <aside class="seccion_2">
+        <textarea class="textarea_2" id="textarea_salida" name="areaencriptar" cols="30" rows="18"></textarea>
+        <img class="img_1" id="img_muneco" src="imagenes/Muñeco.png" alt="Esperando mensaje">
+        <p class="texto_mostrar" id="mostrar_txt"><strong>Ningún mensaje fue encontrado<br><br></strong> Ingresa el texo que desees encriptar o desencriptar</p>
+        <div id="divbotoncopiar">
+          <input type="button" value="Copiar" onclick="copiarTexto()" id="btn_copiar">
+        </div>
+      </aside>
+      
+    </main>
+
+    <footer>
+      <p class="p_footer">Denilson Cervantes Estrada</p>
+    </footer>
+  </body>
+
+</html>
+
+<script type="text/javascript">
+
+  function encriptarTexto() {
+      let textoInfo = textarea_entrada.value;
+      if(textoInfo == 0) {
+          alert('Por favor, escribe un mensaje')
+      } else {
+
+        var textoEscrito = document.getElementById("textarea_entrada").value.toLowerCase();
+
+        document.getElementById("img_muneco").style.display = "none";
+        document.getElementById("mostrar_txt").style.display = "none";
+        document.getElementById("btn_copiar").style.visibility = "visible";
+        document.getElementById("textarea_salida").style.display = "block";
+
+        var textoEncriptado = textoEscrito.replace(/e/igm,"enter");
+            textoEncriptado = textoEncriptado.replace(/o/igm,"ober");
+            textoEncriptado = textoEncriptado.replace(/i/igm,"imes");
+            textoEncriptado = textoEncriptado.replace(/a/igm,"ai");
+            textoEncriptado = textoEncriptado.replace(/u/igm,"ufat");
+            textoEncriptado = textoEncriptado.replace(/á/igm,"ai");
+            textoEncriptado = textoEncriptado.replace(/é/igm,"enter");
+            textoEncriptado = textoEncriptado.replace(/í/igm,"imes");
+            textoEncriptado = textoEncriptado.replace(/ó/igm,"ober");
+            textoEncriptado = textoEncriptado.replace(/ú/igm,"ufat");
+
+        document.getElementById("textarea_salida").innerHTML = textoEncriptado;
+      }
+  }
+
+  function desencriptarTexto() {
+      let textoInfo = textarea_entrada.value;
+      if(textoInfo == 0) {
+          alert('Por favor, escribe un mensaje')
+      } else {
+
+        var textoEscrito = document.getElementById("textarea_entrada").value.toLowerCase();
+
+        document.getElementById("img_muneco").style.display = "none";
+        document.getElementById("mostrar_txt").style.display = "none";
+        document.getElementById("btn_copiar").style.visibility = "visible";
+        document.getElementById("textarea_salida").style.display = "block";
+
+        var textoEncriptado = textoEscrito.replace(/enter/igm,"e");
+            textoEncriptado = textoEncriptado.replace(/ober/igm,"o");
+            textoEncriptado = textoEncriptado.replace(/imes/igm,"i");
+            textoEncriptado = textoEncriptado.replace(/ai/igm,"a");
+            textoEncriptado = textoEncriptado.replace(/ufat/igm,"u");
+
+        document.getElementById("textarea_salida").innerHTML = textoEncriptado;
+      }
+    
+
+  }
+
+  function copiarTexto(){
+      var info = document.getElementById("textarea_salida");
+      var infoContenido = info.textContent;
+      var nTextarea = document.createElement("textarea");
+      nTextarea.value = infoContenido;
+      
+      document.body.appendChild(nTextarea);
+      nTextarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(nTextarea);
+  }
+</script>
